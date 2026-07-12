@@ -1,115 +1,58 @@
 <div align="center">
 
-<img src="assets/logo.png" alt="checkcheck" width="320" />
+<img src="assets/logo-placeholder.svg" alt="checkcheck — logo coming soon" width="220" />
 
 # checkcheck
 
-**Manuscript checking skills for AI coding agents.**
-Portable [Agent Skills](https://code.claude.com/docs/en/skills) that turn Claude Code, OpenAI Codex, and Qwen Code into a rigorous, submission-grade manuscript reviewer.
+### Manuscript checks that preserve authorial control.
 
-[![Skills](https://img.shields.io/badge/skills-1-000?style=flat-square)](skills/)
-[![Claude Code](https://img.shields.io/badge/Claude_Code-✓-d97757?style=flat-square)](#install)
-[![Codex](https://img.shields.io/badge/Codex_CLI-✓-000?style=flat-square)](#install)
-[![Qwen Code](https://img.shields.io/badge/Qwen_Code-✓-615ced?style=flat-square)](#install)
+Two portable AI-agent skills for rigorous biomedical manuscript review. Every workflow is intentionally **report first, revise only with approval**.
+
+[![Skills](https://img.shields.io/badge/skills-2-111827?style=flat-square)](skills/)
+[![Claude_Code](https://img.shields.io/badge/Claude_Code-supported-D97757?style=flat-square)](#install)
+[![Codex](https://img.shields.io/badge/Codex-supported-111827?style=flat-square)](#install)
+[![Qwen_Code](https://img.shields.io/badge/Qwen_Code-supported-615CED?style=flat-square)](#install)
+
+<sub>Logo coming soon.</sub>
 
 </div>
 
 ---
 
-## What's inside
+| Skill | Invoke / say | Scope |
+| --- | --- | --- |
+| [`run-trivial-checks`](skills/run-trivial-checks/SKILL.md) | `/run-trivial-checks` / “trivial” | Language, terminology, abbreviations, nomenclature, tense, references, casing and LaTeX-expression checks. |
+| [`run-nc-checks`](skills/run-nc-checks/SKILL.md) | `/run-nc-checks` / “nature communication(s)” | Nature Communications submission-format compliance: cover letter, main text, figures, references, nomenclature and ORCIDs. |
 
-| Skill | Trigger | What it does |
-|-------|---------|--------------|
-| **`run-nc-checks`** | _"nature communication"_ | Audits a manuscript package against **Nature Communications** format-compliance rules — cover letter, title/abstract/word & display-item limits, methods, statistics reporting, tables, figure legends, `Fig.` citation style, equations, Nature reference style, gene-symbol nomenclature, and ORCID coverage. |
+## The contract
 
-### How it works — a safe two-run pipeline
+```text
+Run 1  →  write a review summary; edit nothing; wait for the author
+Run 2  →  apply only approved findings; report the remaining author input
+```
 
-1. **Run 1 — Report only.** The skill reads your submission and writes a `NC_CHECKS_SUMMARY.md` compliance report **without editing anything**, then stops and waits. Nothing is changed, because many "deviations" are deliberate.
-2. **Run 2 — Revise.** After you review the report and say what to fix, it applies **only** the approved items (parallelized across subagents), and never fabricates statistics, referees, or ORCIDs — missing data is flagged `NEEDS AUTHOR INPUT`.
-
----
+`run-trivial-checks` additionally validates the final diff to confirm revisions changed expression, not scientific content.
 
 ## Install
-
-Clone once, then install into every agent you use. Claude Code is linked (auto-updates on `git pull`); Codex and Qwen get generated command files from the same source.
 
 ```bash
 git clone https://github.com/EthanShenx/checkcheck.git ~/checkcheck
 cd ~/checkcheck
-./install.sh            # installs into every detected agent
+./install.sh
 ```
 
-Install into just one agent:
+Install one target only with `./install.sh --claude`, `--codex`, or `--qwen`. Claude Code uses linked skills and receives pulls immediately; rerun the installer after updating for Codex and Qwen.
 
-```bash
-./install.sh --claude   # Claude Code only
-./install.sh --codex    # Codex CLI only
-./install.sh --qwen     # Qwen Code only
+## Use
+
+```text
+/run-trivial-checks ./manuscript
+# or
+/run-nc-checks ./submission
 ```
 
-<details>
-<summary><b>What the installer writes (and how to do it manually)</b></summary>
-
-| Agent | Location | Invoke as |
-|-------|----------|-----------|
-| **Claude Code** | `~/.claude/skills/run-nc-checks/` → **symlinked** to this repo | auto-triggers on _"nature communication"_ |
-| **Codex CLI** | `~/.codex/prompts/run-nc-checks.md` | `/run-nc-checks` |
-| **Qwen Code** | `~/.qwen/commands/run-nc-checks.toml` | `/run-nc-checks` |
-
-**Manual install (Claude Code):** copy or symlink the skill folder:
-```bash
-ln -s ~/checkcheck/skills/run-nc-checks ~/.claude/skills/run-nc-checks
-```
-**Manual install (Codex):** copy the body of `skills/run-nc-checks/SKILL.md` (minus the YAML frontmatter) to `~/.codex/prompts/run-nc-checks.md`.
-**Manual install (Qwen):** wrap the same body as the `prompt` field of `~/.qwen/commands/run-nc-checks.toml`.
-
-</details>
+Review `TRIVIAL_CHECKS_SUMMARY.md` or `NC_CHECKS_SUMMARY.md`, then reply with the finding IDs to apply. The skills never invent data, statistics, ORCIDs, reviewer details, or other author-supplied information.
 
 ---
 
-## Usage
-
-```
-you ▸  run the nature communication checks on ./manuscript
-       (Claude Code auto-triggers; on Codex/Qwen type /run-nc-checks)
-
-  ⤷ Run 1 writes NC_CHECKS_SUMMARY.md and waits.
-  ⤷ You review it and reply: "apply MT-REF-*, skip the cover-letter items"
-  ⤷ Run 2 applies only those, and reports what still needs your input.
-```
-
----
-
-## Staying up to date
-
-Pull the latest skills any time:
-
-```bash
-cd ~/checkcheck && git pull
-```
-
-- **Claude Code** picks up changes immediately — the skill folder is a symlink into this repo, so a `git pull` is all you need.
-- **Codex & Qwen** use generated files, so re-run the installer after pulling:
-
-```bash
-cd ~/checkcheck && git pull && ./install.sh
-```
-
-Want it fully automatic? Add a shell alias that always syncs before you start work:
-
-```bash
-# ~/.zshrc or ~/.bashrc
-alias checkcheck-update='git -C ~/checkcheck pull --quiet && ~/checkcheck/install.sh'
-```
-
----
-
-## Contributing skills
-
-Each skill is a folder under [`skills/`](skills/) containing a single `SKILL.md` with YAML frontmatter (`name`, `description`) followed by the instructions. Drop in a new folder, and `install.sh` will pick it up for all three agents automatically.
-
----
-
-<div align="center">
-<sub>checkcheck · built for meticulous manuscripts</sub>
-</div>
+<div align="center"><sub>checkcheck · meticulous checks, author-approved changes</sub></div>
