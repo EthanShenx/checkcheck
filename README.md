@@ -50,7 +50,3 @@ Install one target only with `./install.sh --claude`, `--codex`, or `--qwen`. Cl
 ```
 
 Review the generated `*_SUMMARY.md`, then reply with the finding IDs to apply. The skills never invent data, statistics, ORCIDs, reviewer details, or other author-supplied information.
-
----
-
-<div align="center"><sub>checkcheck · meticulous checks, author-approved changes</sub></div>
