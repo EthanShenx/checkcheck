@@ -69,6 +69,9 @@ reported as `REVIEW`, not silently “corrected.”
    or change the scientific claim. Report only.
 
 3. **Abbreviations.** Audit the full document for:
+   - **no abbreviation definitions in the abstract**: spell out a term in the abstract rather than
+     introducing it as `full term (DAA)` or `DAA (full term)`; if the abbreviation is needed later,
+     define it on first use in the main text;
    - a consistent definition form: `define an abbreviation (DAA)` or `DAA (define an abbreviation)`;
    - definition on first use, with full term and parenthesised abbreviation;
    - consistent use of the abbreviation after definition, without unsafe partial matches (for
