@@ -21,7 +21,7 @@ Two portable AI-agent skills for rigorous biomedical manuscript review. Every wo
 
 | Skill | Invoke / say | Scope |
 | --- | --- | --- |
-| [`run-trivial-checks`](skills/run-trivial-checks/SKILL.md) | `/run-trivial-checks` / “trivial” | Language, terminology, abbreviations, nomenclature, tense, references, casing and LaTeX-expression checks. |
+| [`run-trivial-checks`](skills/run-trivial-checks/SKILL.md) | `/run-trivial-checks` / “trivial” | Language, terminology, abbreviations, nomenclature, tense, references, casing, LaTeX, statistics and prose-notation checks. |
 | [`run-nc-checks`](skills/run-nc-checks/SKILL.md) | `/run-nc-checks` / “nature communication(s)” | Nature Communications submission-format compliance: cover letter, main text, figures, references, nomenclature and ORCIDs. |
 
 ## The contract

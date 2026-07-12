@@ -3,8 +3,9 @@ name: run-trivial-checks
 description: >
   Review a biomedical manuscript for author-approved, expression-level “trivial” checks: typos,
   grammar, abbreviations, gene/protein nomenclature, American English, case consistency, LaTeX
-  expressions, duplicate references, and section-appropriate tense. Use whenever the user says
-  "trivial", "run trivial checks", or invokes /run-trivial-checks. First run reports only in
+  expressions, statistical-reporting consistency, prose-appropriate mathematical notation,
+  duplicate references, and section-appropriate tense. Use whenever the user says "trivial",
+  "run trivial checks", or invokes /run-trivial-checks. First run reports only in
   TRIVIAL_CHECKS_SUMMARY.md; a later run applies only user-approved fixes and validates that
   scientific content did not change.
 allowed-tools:
@@ -100,11 +101,44 @@ reported as `REVIEW`, not silently “corrected.”
    not limited to a superscript plus in `Adam12+` (for example, `Adam12$^+$` where appropriate).
    Preserve symbols inside verbatim contexts, URLs, code, and reference metadata.
 
-8. **Duplicate references.** Identify candidate duplicate BibTeX entries and duplicate in-text
+8. **Statistical reporting consistency.** Compare the main text, tables, figure legends, and text
+   embedded in figures. Report inconsistent formats for P values, fold changes, confidence
+   intervals, effect sizes, `n`, and other repeated statistics. In particular, check that:
+   - P-value spelling/capitalisation, spacing, decimal precision, and use of `=` versus `<` or `>`
+     are consistent throughout;
+   - asterisk notation (`*`, `**`, `***`, and so on) has one clear, consistently applied threshold
+     definition wherever it is used;
+   - borderline or non-significant P values use exact values to two or three decimal places (for
+     example, `p = 0.041` or `p = 0.075`), while highly significant results use an established
+     threshold (for example, `p < 0.001`) rather than an impossible rounded value such as
+     `p = 0.0000`;
+   - analyses involving thousands of genes, proteins, or comparable multiple comparisons report
+     an adjusted P value / FDR where the study design makes false-discovery control necessary;
+   - fold-change direction, base/log convention, sign, rounding, and labels are defined and used
+     consistently.
+
+   Do not infer an adjustment method, recalculate a statistic, or alter a value. If the analysis
+   context does not establish whether multiple-testing correction is required, mark it `NEEDS
+   AUTHOR INPUT`.
+
+9. **Mathematical and shorthand notation in prose.** Flag notation used as a prose substitute in
+   narrative text when a written word or phrase is expected. Suggest context-appropriate wording:
+   `v.s.` → “versus”; `&` → “and”; `±` → “plus or minus”; `≈` → “approximately”; `×` → “times” or
+   “by”; `→` → “leads to”, “results in”, or “to”; `#` → “number”; `@` → “at”; and `/` used as
+   “or” or “per” → the written word (for example, “miles per hour”, not “miles/hour”). Flag
+   vertical bars used to mean absolute value in prose and inequality symbols used in place of
+   words such as “less than.”
+
+   Do **not** flag conventional, meaning-preserving notation in equations, variable names,
+   statistical expressions such as `p < 0.05`, percentages (for example, `55%`), units, chemical
+   formulae, established names (for example, AT&T), URLs, code, figure axes, or bibliography
+   metadata. Where the boundary is unclear, report it for author review instead of changing it.
+
+10. **Duplicate references.** Identify candidate duplicate BibTeX entries and duplicate in-text
    citations. Verify bibliographic identity (DOI, title, authors, venue, year) before marking a
    candidate redundant. Report the merge target and affected citations; do not merge anything.
 
-9. **Tense by section.** Flag only material deviations from the following guidance, distinguishing
+11. **Tense by section.** Flag only material deviations from the following guidance, distinguishing
    descriptive prose from quotations and established scientific names:
    - **Abstract/summary:** present simple for aims and continuing facts; present perfect for
      relevant prior research.
