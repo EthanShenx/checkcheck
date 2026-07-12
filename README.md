@@ -1,19 +1,14 @@
 <div align="center">
 
-<img src="assets/logo-placeholder.svg" alt="checkcheck — logo coming soon" width="220" />
+<img src="assets/logo.png" alt="checkcheck — logo" width="220" />
 
 # checkcheck
 
 ### Manuscript checks that preserve authorial control.
 
-Two portable AI-agent skills for rigorous biomedical manuscript review. Every workflow is intentionally **report first, revise only with approval**.
-
-[![Skills](https://img.shields.io/badge/skills-3-111827?style=flat-square)](skills/)
 [![Claude_Code](https://img.shields.io/badge/Claude_Code-supported-D97757?style=flat-square)](#install)
 [![Codex](https://img.shields.io/badge/Codex-supported-111827?style=flat-square)](#install)
 [![Qwen_Code](https://img.shields.io/badge/Qwen_Code-supported-615CED?style=flat-square)](#install)
-
-<sub>Logo coming soon.</sub>
 
 </div>
 
