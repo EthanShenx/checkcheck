@@ -4,10 +4,10 @@ description: >
   Review a biomedical manuscript for author-approved, expression-level “trivial” checks: typos,
   grammar, abbreviations, gene/protein nomenclature, American English, case consistency, LaTeX
   expressions, statistical-reporting consistency, prose-appropriate mathematical notation,
-  duplicate references, and section-appropriate tense. Use whenever the user says "trivial",
-  "run trivial checks", or invokes /run-trivial-checks. First run reports only in
-  TRIVIAL_CHECKS_SUMMARY.md; a later run applies only user-approved fixes and validates that
-  scientific content did not change.
+  number-style consistency, LaTeX syntax and structural grammar, duplicate references, and
+  section-appropriate tense. Use whenever the user says "trivial", "run trivial checks", or
+  invokes /run-trivial-checks. First run reports only in TRIVIAL_CHECKS_SUMMARY.md; a later run
+  applies only user-approved fixes and validates that scientific content did not change.
 allowed-tools:
   - Read
   - Write
@@ -124,7 +124,36 @@ reported as `REVIEW`, not silently “corrected.”
    context does not establish whether multiple-testing correction is required, mark it `NEEDS
    AUTHOR INPUT`.
 
-9. **Mathematical and shorthand notation in prose.** Flag notation used as a prose substitute in
+9. **Number style and numerical-expression consistency.** Check narrative prose, figure/table
+   legends, and display text against the following house style, and flag inconsistent or incorrect
+   uses with their context. Preserve values in equations, variable names, reference metadata,
+   identifiers, dataset names, gene/protein symbols, and literal quoted material.
+   - Write integers from zero through nine as words. Write 10 and higher as numerals. A manuscript
+     may instead use words for values that take two words or fewer (for example, “twenty-seven”),
+     but it must apply that alternative consistently; hyphenate compound number words. If the
+     manuscript’s chosen convention is unclear, mark it `NEEDS AUTHOR INPUT` rather than imposing
+     one.
+   - Use numerals for precise large values in technical writing (for example, `200,000 km`). Either
+     numerals or words are acceptable for larger values when context permits, but use words for
+     deliberately vague quantities (for example, “several thousand”).
+   - Use numerals for measurements and precise durations (`500 km`, `10 minutes`), decimals, and
+     fractions (`0.5 cm`). Keep vague quantities in words where appropriate (for example, “around
+     half of the population”). Hyphenate a measurement that jointly modifies a noun (`a 3-year-old
+     child`).
+   - Pair a word-form number with “percent” (`six percent`) and a numeral with `%` (`24%`).
+   - Use numerals for dates, precise money, and precise times (`Monday 4 April 2016`, `£1.00 per
+     week`, `08:00`); use words for deliberately vague amounts or times (`well over a million`,
+     “around eight o’clock”).
+   - When two numbers run together, write the shorter quantity as a word and the longer as a
+     numeral (for example, “a tower of 1,000 ten-pence pieces”).
+   - Avoid opening a sentence with a numeral. Recast it or write the number in words; for a year,
+     use “The year 1066 …” where recasting is not suitable.
+
+   Do not “correct” established reporting conventions such as `p < 0.05`, standard units,
+   mathematical notation, table cells, or figure-axis labels without author approval. Never change
+   a numerical value, unit, date, time, or scientific meaning while applying a style revision.
+
+10. **Mathematical and shorthand notation in prose.** Flag notation used as a prose substitute in
    narrative text when a written word or phrase is expected. Suggest context-appropriate wording:
    `v.s.` → “versus”; `&` → “and”; `±` → “plus or minus”; `≈` → “approximately”; `×` → “times” or
    “by”; `→` → “leads to”, “results in”, or “to”; `#` → “number”; `@` → “at”; and `/` used as
@@ -137,11 +166,26 @@ reported as `REVIEW`, not silently “corrected.”
    formulae, established names (for example, AT&T), URLs, code, figure axes, or bibliography
    metadata. Where the boundary is unclear, report it for author review instead of changing it.
 
-10. **Duplicate references.** Identify candidate duplicate BibTeX entries and duplicate in-text
+11. **LaTeX syntax and structural grammar.** Check source-level LaTeX correctness, not English
+   grammar. Flag unmatched or incorrectly nested braces/environments, unbalanced math delimiters,
+   malformed or incorrectly scoped commands, missing command arguments, unescaped reserved
+   characters where escaping is required, malformed citations/cross-references, duplicate labels,
+   unresolved references/citations, and referenced input/figure/bibliography files that cannot be
+   found. Also flag malformed list, table, figure, and equation environments when their structure
+   is invalid or likely to compile incorrectly.
+
+   When a LaTeX toolchain is available, run a non-interactive compilation check with all generated
+   output directed to a temporary directory outside the manuscript; report the relevant compiler
+   diagnostics without editing source files. Do not treat intentional custom macros, journal class
+   behaviour, warnings from unavailable external dependencies, or layout preferences as errors
+   unless the source or compiler output substantiates the finding. Never alter a command, macro,
+   label, citation key, mathematical expression, or build configuration during Phase 1.
+
+12. **Duplicate references.** Identify candidate duplicate BibTeX entries and duplicate in-text
    citations. Verify bibliographic identity (DOI, title, authors, venue, year) before marking a
    candidate redundant. Report the merge target and affected citations; do not merge anything.
 
-11. **Tense by section.** Flag only material deviations from the following guidance, distinguishing
+13. **Tense by section.** Flag only material deviations from the following guidance, distinguishing
    descriptive prose from quotations and established scientific names:
    - **Abstract/summary:** present simple for aims and continuing facts; present perfect for
      relevant prior research.
