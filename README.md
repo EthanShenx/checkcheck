@@ -16,7 +16,7 @@
 
 | Skill | Invoke / say | Scope |
 | --- | --- | --- |
-| [`run-trivial-checks`](skills/run-trivial-checks/SKILL.md) | `/run-trivial-checks` / “trivial” | Language, terminology, abbreviations, nomenclature, tense, references, number style, LaTeX syntax, statistics and prose-notation checks. |
+| [`run-trivial-checks`](skills/run-trivial-checks/SKILL.md) | `/run-trivial-checks` / “trivial” | Language, terminology, abbreviations, nomenclature, tense, references, supplementary citations, number style, LaTeX syntax, statistics and prose-notation checks. |
 | [`run-de-ai`](skills/run-de-ai/SKILL.md) | `/run-de-ai` / “de-AI” | Identifies AI-like prose habits while retaining the manuscript’s scientific meaning and authorial voice. |
 | [`run-nc-checks`](skills/run-nc-checks/SKILL.md) | `/run-nc-checks` / “nature communication(s)” | Nature Communications submission-format compliance: cover letter, main text, figures, references, nomenclature and ORCIDs. |
 

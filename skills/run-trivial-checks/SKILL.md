@@ -4,10 +4,11 @@ description: >
   Review a biomedical manuscript for author-approved, expression-level “trivial” checks: typos,
   grammar, abbreviations, gene/protein nomenclature, American English, case consistency, LaTeX
   expressions, statistical-reporting consistency, prose-appropriate mathematical notation,
-  number-style consistency, LaTeX syntax and structural grammar, duplicate references, and
-  section-appropriate tense. Use whenever the user says "trivial", "run trivial checks", or
-  invokes /run-trivial-checks. First run reports only in TRIVIAL_CHECKS_SUMMARY.md; a later run
-  applies only user-approved fixes and validates that scientific content did not change.
+  number-style consistency, LaTeX syntax and structural grammar, supplementary-material citation
+  consistency, duplicate references, and section-appropriate tense. Use whenever the user says
+  "trivial", "run trivial checks", or invokes /run-trivial-checks. First run reports only in
+  TRIVIAL_CHECKS_SUMMARY.md; a later run applies only user-approved fixes and validates that
+  scientific content did not change.
 allowed-tools:
   - Read
   - Write
@@ -181,11 +182,27 @@ reported as `REVIEW`, not silently “corrected.”
    unless the source or compiler output substantiates the finding. Never alter a command, macro,
    label, citation key, mathematical expression, or build configuration during Phase 1.
 
-12. **Duplicate references.** Identify candidate duplicate BibTeX entries and duplicate in-text
+12. **Supplementary-material citations.** Audit every in-text citation to supplementary figures
+   and tables, including citations in the main text, figure/table legends, and supplementary text.
+   Require a single, uniform, professional format across both item types. Flag variation in:
+   - wording (for example, “Supplementary Figure” versus “SI Figure” versus “Fig. S”);
+   - abbreviation style (spelled out versus shortened);
+   - numbering convention (for example, `S4` versus `4`); and
+   - spacing before the identifier: LaTeX non-breaking space (`~`), a regular space, no space, or
+     the equivalent rendered non-breaking space in non-LaTeX sources.
+
+   Figures and tables must be treated in parallel. For example, if the chosen figure format is
+   `Supplementary Figure~S4`, use the corresponding table format `Supplementary Table~S2`; do not
+   allow inconsistent forms such as `Supplementary Figure~S4`, `SI F4`, and
+   `Supplementary Figure~4` to coexist. Identify the established dominant format when one exists;
+   otherwise mark the convention as `NEEDS AUTHOR INPUT`. Preserve citation targets, numbering,
+   and LaTeX cross-reference semantics unless their exact correction is approved.
+
+13. **Duplicate references.** Identify candidate duplicate BibTeX entries and duplicate in-text
    citations. Verify bibliographic identity (DOI, title, authors, venue, year) before marking a
    candidate redundant. Report the merge target and affected citations; do not merge anything.
 
-13. **Tense by section.** Flag only material deviations from the following guidance, distinguishing
+14. **Tense by section.** Flag only material deviations from the following guidance, distinguishing
    descriptive prose from quotations and established scientific names:
    - **Abstract/summary:** present simple for aims and continuing facts; present perfect for
      relevant prior research.
