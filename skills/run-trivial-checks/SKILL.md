@@ -4,11 +4,11 @@ description: >
   Review a biomedical manuscript for author-approved, expression-level “trivial” checks: typos,
   grammar, abbreviations, gene/protein nomenclature, American English, case consistency, LaTeX
   expressions, statistical-reporting consistency, prose-appropriate mathematical notation,
-  number-style consistency, LaTeX syntax and structural grammar, supplementary-material citation
-  consistency, duplicate references, and section-appropriate tense. Use whenever the user says
-  "trivial", "run trivial checks", or invokes /run-trivial-checks. First run reports only in
-  TRIVIAL_CHECKS_SUMMARY.md; a later run applies only user-approved fixes and validates that
-  scientific content did not change.
+  number-style consistency, LaTeX syntax and structural grammar, figure-legend panel style,
+  supplementary-material citation consistency, duplicate references, and section-appropriate
+  tense. Use whenever the user says "trivial", "run trivial checks", or invokes
+  /run-trivial-checks. First run reports only in TRIVIAL_CHECKS_SUMMARY.md; a later run applies
+  only user-approved fixes and validates that scientific content did not change.
 allowed-tools:
   - Read
   - Write
@@ -157,8 +157,9 @@ reported as `REVIEW`, not silently “corrected.”
 10. **Mathematical and shorthand notation in prose.** Flag notation used as a prose substitute in
    narrative text when a written word or phrase is expected. Suggest context-appropriate wording:
    `v.s.` → “versus”; `&` → “and”; `±` → “plus or minus”; `≈` → “approximately”; `×` → “times” or
-   “by”; `→` → “leads to”, “results in”, or “to”; `#` → “number”; `@` → “at”; and `/` used as
-   “or” or “per” → the written word (for example, “miles per hour”, not “miles/hour”). Flag
+   “by”; `→` → “leads to”, “results in”, or “to”; `#` → “number”; and `@` → “at”. When “or” can
+   express the intended relation, use **or**, never `/`; likewise, spell out **per** rather than
+   using `/` as shorthand (for example, “miles per hour”, not “miles/hour”). Flag
    vertical bars used to mean absolute value in prose and inequality symbols used in place of
    words such as “less than.”
 
@@ -182,7 +183,27 @@ reported as `REVIEW`, not silently “corrected.”
    unless the source or compiler output substantiates the finding. Never alter a command, macro,
    label, citation key, mathematical expression, or build configuration during Phase 1.
 
-12. **Supplementary-material citations.** Audit every in-text citation to supplementary figures
+12. **Figure-legend panel identifiers and citation style.** Audit all figure legends for a single,
+   professional panel-identifier convention. For every panel letter or range:
+   - make the complete identifier **bold**, including both parentheses and range punctuation. In
+     LaTeX use, for example, `\textbf{(b-d)}` and `\textbf{(b)}`, not `(\textbf{b-d})` or
+     `(\textbf{b})`; use the equivalent complete bold formatting in non-LaTeX sources;
+   - use one capitalisation convention throughout: lowercase (`a`, `b`, `c`) or uppercase (`A`,
+     `B`, `C`). Determine the manuscript’s majority convention across panel identifiers and flag
+     deviations. If no dominant convention exists, mark it `NEEDS AUTHOR INPUT` rather than
+     selecting one; and
+   - where a legend describes a set of panels, put the bold leading group first, then the shared
+     description, and attach each bold individual identifier to its specific subject at the point
+     it appears. Required form: `\textbf{(a-c)} Selection frequency of the top candidate genes
+     identified by stability selection in the mouse \textbf{(a)}, human \textbf{(b)}, and cow
+     \textbf{(c)} datasets.` Flag the inverse construction that introduces subjects as
+     `\textbf{(a)} mouse, \textbf{(b)} human, and \textbf{(c)} cow` before the shared description.
+
+   Do not alter panel lettering embedded in figure artwork during a text-only revision. If artwork
+   and legend identifiers disagree, report the issue and mark it `NEEDS AUTHOR INPUT` unless the
+   author explicitly supplies editable figure assets and approves that change.
+
+13. **Supplementary-material citations.** Audit every in-text citation to supplementary figures
    and tables, including citations in the main text, figure/table legends, and supplementary text.
    Require a single, uniform, professional format across both item types. Flag variation in:
    - wording (for example, “Supplementary Figure” versus “SI Figure” versus “Fig. S”);
@@ -198,11 +219,11 @@ reported as `REVIEW`, not silently “corrected.”
    otherwise mark the convention as `NEEDS AUTHOR INPUT`. Preserve citation targets, numbering,
    and LaTeX cross-reference semantics unless their exact correction is approved.
 
-13. **Duplicate references.** Identify candidate duplicate BibTeX entries and duplicate in-text
+14. **Duplicate references.** Identify candidate duplicate BibTeX entries and duplicate in-text
    citations. Verify bibliographic identity (DOI, title, authors, venue, year) before marking a
    candidate redundant. Report the merge target and affected citations; do not merge anything.
 
-14. **Tense by section.** Flag only material deviations from the following guidance, distinguishing
+15. **Tense by section.** Flag only material deviations from the following guidance, distinguishing
    descriptive prose from quotations and established scientific names:
    - **Abstract/summary:** present simple for aims and continuing facts; present perfect for
      relevant prior research.
