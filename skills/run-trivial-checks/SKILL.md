@@ -5,10 +5,10 @@ description: >
   grammar, abbreviations, gene/protein nomenclature, American English, case consistency, LaTeX
   expressions, statistical-reporting consistency, prose-appropriate mathematical notation,
   number-style consistency, LaTeX syntax and structural grammar, figure-legend panel style,
-  supplementary-material citation consistency, duplicate references, and section-appropriate
-  tense. Use whenever the user says "trivial", "run trivial checks", or invokes
-  /run-trivial-checks. First run reports only in TRIVIAL_CHECKS_SUMMARY.md; a later run applies
-  only user-approved fixes and validates that scientific content did not change.
+  main-figure citation order, supplementary-material citation consistency, duplicate references,
+  and section-appropriate tense. Use whenever the user says "trivial", "run trivial checks", or
+  invokes /run-trivial-checks. First run reports only in TRIVIAL_CHECKS_SUMMARY.md; a later run
+  applies only user-approved fixes and validates that scientific content did not change.
 allowed-tools:
   - Read
   - Write
@@ -211,7 +211,25 @@ reported as `REVIEW`, not silently “corrected.”
    and legend identifiers disagree, report the issue and mark it `NEEDS AUTHOR INPUT` unless the
    author explicitly supplies editable figure assets and approves that change.
 
-13. **Supplementary-material citations.** Audit every in-text citation to supplementary figures
+13. **Main-figure citation order.** Check that main figures are numbered in the order of their
+   first citation in the final manuscript text. The text is fixed: do **not** propose text edits to
+   solve an ordering issue. Parse the main text in reading order, find the first citation to every
+   main figure (including LaTeX cross-references and explicit `Fig.` / `Figure` citations), and
+   compare that sequence with the current main-figure order/numbering as established by the source
+   figure environments and labels. Exclude supplementary figures from this check; audit them under
+   supplementary-material citations.
+
+   In `TRIVIAL_CHECKS_SUMMARY.md`, report every mismatch in this explicit form: **“Figure X is
+   currently number N but should be number M; move it before/after Figure Y.”** Also report:
+   - figures that are never cited in the main text; and
+   - figure citations whose target figure/label is missing.
+
+   Show a complete proposed move list and wait for the author’s confirmation before changing any
+   figure order. In Phase 2, reorder only approved figure environments/files and preserve their
+   labels, citation targets, captions, artwork, and all manuscript text. After an approved move,
+   validate the source/compiled cross-references and rerun the first-citation-order comparison.
+
+14. **Supplementary-material citations.** Audit every in-text citation to supplementary figures
    and tables, including citations in the main text, figure/table legends, and supplementary text.
    Require a single, uniform, professional format across both item types. Flag variation in:
    - wording (for example, “Supplementary Figure” versus “SI Figure” versus “Fig. S”);
@@ -227,11 +245,11 @@ reported as `REVIEW`, not silently “corrected.”
    otherwise mark the convention as `NEEDS AUTHOR INPUT`. Preserve citation targets, numbering,
    and LaTeX cross-reference semantics unless their exact correction is approved.
 
-14. **Duplicate references.** Identify candidate duplicate BibTeX entries and duplicate in-text
+15. **Duplicate references.** Identify candidate duplicate BibTeX entries and duplicate in-text
    citations. Verify bibliographic identity (DOI, title, authors, venue, year) before marking a
    candidate redundant. Report the merge target and affected citations; do not merge anything.
 
-15. **Tense by section.** Flag only material deviations from the following guidance, distinguishing
+16. **Tense by section.** Flag only material deviations from the following guidance, distinguishing
    descriptive prose from quotations and established scientific names:
    - **Abstract/summary:** present simple for aims and continuing facts; present perfect for
      relevant prior research.

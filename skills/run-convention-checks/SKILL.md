@@ -2,9 +2,10 @@
 name: run-convention-checks
 description: >
   Check whether a manuscript follows academic-paper conventions. The initial scope audits the
-  Methods section for forbidden \texttt{} formatting, missing citations for software and described
-  practices, missing motivation for consequential analytical choices, and nonessential
-  implementation detail that does not support replication. Use whenever the user says
+  Methods section for forbidden \texttt{} formatting, missing citations and functional
+  introductions for niche computational-biology software, missing motivation for consequential
+  analytical choices, and nonessential implementation detail that does not support replication.
+  Use whenever the user says
   "convention checks", "academic paper conventions", "methods conventions", or invokes
   /run-convention-checks. First run writes CONVENTION_CHECKS_SUMMARY.md without editing; a later
   run applies only user-approved revisions and validates that methods remain reproducible.
@@ -80,7 +81,28 @@ provide.
    claim and the citation needed; mark it `NEEDS AUTHOR INPUT` if the correct source is unknown.
    Never invent a citation, DOI, author, or claim of prior validation.
 
-3. **Motivation for consequential choices.** Check that substantive processing and analysis steps
+3. **Functional introduction of niche computational-biology software.** At first substantive use,
+   ensure a specialised or niche computational-biology tool is introduced with a brief,
+   scientifically accurate statement of what it does and why it is being used in this analysis.
+   This applies in addition to its citation and version where appropriate. It does **not** require a
+   tutorial for foundational, widely understood analysis environments such as Scanpy or Seurat,
+   unless their particular use would otherwise be unclear.
+
+   Flag a bare tool introduction and propose a concise, purpose-led replacement grounded only in
+   the manuscript’s stated analysis. Suitable patterns include:
+   - “The tissue architecture was analysed using RESEPT v1.15, a computational tool that generates
+     an atlas of regional gene-expression patterns in spatial transcriptomics data.”
+   - “Regulatory analysis was conducted using DeepMAPS v1.033. We used DeepMAPS to build cell and
+     gene embeddings and obtain active gene modules through its graph-transformer model.”
+   - “Deconvolution of mixed cell populations was performed using the CARD v1.1 R package, which
+     uses a reference-based approach and cell-type-specific expression signatures to estimate
+     cell-type proportions in bulk RNA-seq or spatial transcriptomics data.”
+
+   Do not overstate a tool’s capabilities, add unsupported method details, or turn this brief
+   contextualisation into replication-irrelevant prose. If the function or reason for use cannot
+   be determined from the manuscript and its cited source, mark it `NEEDS AUTHOR INPUT`.
+
+4. **Motivation for consequential choices.** Check that substantive processing and analysis steps
    explain both what was done and why it was appropriate for the question. Flag a bare procedural
    transition such as “Milo’s (v1.3.1) was used next” when the reader is not told its analytical
    purpose. A suitable revision makes the purpose explicit, for example: “To test for changes in
@@ -94,14 +116,14 @@ provide.
    transformation, cluster removal, data inclusion/exclusion, parameter selection, and prioritising
    one result or cell population over another.
 
-4. **Reasons for exclusions and non-obvious parameters.** Flag removals, exclusions, thresholds,
+5. **Reasons for exclusions and non-obvious parameters.** Flag removals, exclusions, thresholds,
    resolution choices, and other consequential settings that state *what* happened but not *why*.
    For example, a statement that cluster 4 was removed from human data and cluster 10 from mouse
    data must explain the biological or technical reason for each removal, even briefly. Do not
    fabricate reasons or infer that a cluster is low quality, doublet-like, or irrelevant. Mark the
    item `NEEDS AUTHOR INPUT` unless the rationale is established elsewhere in the manuscript.
 
-5. **Replication-relevant concision.** Identify implementation details that do not help a reader
+6. **Replication-relevant concision.** Identify implementation details that do not help a reader
    interpret or reproduce the analysis and therefore consume limited Methods word count. Propose a
    concise revision only when the information is genuinely nonessential in context. Typical
    candidates include:
