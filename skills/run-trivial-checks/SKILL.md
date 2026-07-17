@@ -103,7 +103,15 @@ reported as `REVIEW`, not silently “corrected.”
 
 7. **LaTeX expressions.** Flag special symbols that should be represented in LaTeX, including but
    not limited to a superscript plus in `Adam12+` (for example, `Adam12$^+$` where appropriate).
-   Preserve symbols inside verbatim contexts, URLs, code, and reference metadata.
+   Audit terminology that requires a special character—especially Greek letters—and require the
+   correct LaTeX notation rather than a closest Latin-letter substitute. For example, when the
+   intended term is NF-κB1, use valid project LaTeX such as `NF-$\kappa$B1` (or the template’s
+   established equivalent) rather than `NFKB1`. Apply the equivalent principle to other Greek
+   letters and special scientific characters. Reconcile this audit with
+   the gene/protein nomenclature check: do **not** change a canonical Latin-only gene or protein
+   symbol merely because it resembles a term containing a Greek glyph. If the intended terminology
+   is ambiguous, mark it `NEEDS AUTHOR INPUT`. Preserve symbols inside verbatim contexts, URLs,
+   code, and reference metadata.
 
 8. **Statistical reporting consistency.** Compare the main text, tables, figure legends, and text
    embedded in figures. Report inconsistent formats for P values, fold changes, confidence
