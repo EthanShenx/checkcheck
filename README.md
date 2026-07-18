@@ -17,6 +17,7 @@
 | Skill | Invoke / say | Scope |
 | --- | --- | --- |
 | [`run-trivial-checks`](skills/run-trivial-checks/SKILL.md) | `/run-trivial-checks` / “trivial” | Language, terminology, abbreviations, nomenclature, tense, references, figure-panel, figure-order and supplementary citations, number style, LaTeX syntax, statistics and prose-notation checks. |
+| [`run-title-check`](skills/run-title-check/SKILL.md) | `/run-title-check` / “title check” | Article, Results, figure-legend and Methods title review with three precision-first alternatives per title. |
 | [`run-convention-checks`](skills/run-convention-checks/SKILL.md) | `/run-convention-checks` / “convention checks” | Academic-writing conventions, beginning with Methods rationale, software context, citation, replication-detail and LaTeX-formatting checks. |
 | [`run-de-ai`](skills/run-de-ai/SKILL.md) | `/run-de-ai` / “de-AI” | Identifies AI-like prose habits while retaining the manuscript’s scientific meaning and authorial voice. |
 | [`run-nc-checks`](skills/run-nc-checks/SKILL.md) | `/run-nc-checks` / “nature communication(s)” | Nature Communications submission-format compliance: cover letter, main text, figures, references, nomenclature and ORCIDs. |
@@ -44,6 +45,8 @@ Install one target only with `./install.sh --claude`, `--codex`, or `--qwen`. Cl
 
 ```text
 /run-trivial-checks ./manuscript
+# or
+/run-title-check ./manuscript
 # or
 /run-convention-checks ./manuscript
 # or
