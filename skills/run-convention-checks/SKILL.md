@@ -39,6 +39,14 @@ what a reader needs to reproduce the work.
 3. **Wait:** stop after the report and obtain the author’s explicit approval of finding IDs/areas.
 4. **Revise only approved findings:** a report or a detected issue is never permission to edit.
 
+## Subagent parity
+
+When invoking a subagent for analysis, revision, or validation, configure it with the **same model,
+intelligence level, and reasoning effort as the current agent**. For example, if the current agent
+is Opus 4.8 with high reasoning, every subagent must be Opus 4.8 with high reasoning. Never
+delegate a decision to a lower-capability or lower-reasoning agent. If exact parity cannot be set,
+perform the work locally instead.
+
 ## Detect the phase
 
 - **Phase 1 — REPORT:** The user asks for convention checks, or there is no
@@ -254,6 +262,25 @@ provide.
     passage that violates this principle, not only representative examples. Each suggestion must
     retain the scientific meaning, level of certainty, and necessary technical detail.
 
+13. **Figure-citation position and evidentiary support.** Before reviewing citation positions,
+    inspect every main-text figure and its complete legend in detail, including all panels, and
+    build an evidence map of what each figure/panel actually demonstrates. Do not infer the figure's
+    meaning from its title or legend alone when the figure itself is available.
+
+    Then scan the main text sentence by sentence. A sentence must cite the relevant figure whenever
+    it makes a specific empirical claim for which that figure provides the evidence, regardless of
+    whether the sentence is first, middle, or last in a paragraph. For example, “X increased Y by
+    roughly 40% relative to control” needs the appropriate citation (for example, `Fig. 1A`) even
+    when it opens a paragraph. A framing/topic sentence that reports no data claim, such as “To
+    assess whether X affects Y, we measured Y under three conditions,” does not need a figure
+    citation solely because it lacks one.
+
+    For each missing or misplaced citation, report the sentence location, the empirical claim, the
+    exact supporting figure/panel from the evidence map, and the proposed citation insertion. Do
+    not add a figure citation when a table, external reference, or non-empirical context—not the
+    figure—provides the support. Also flag a citation where the cited figure/panel does not support
+    the sentence's claim. Do not edit the text or add citations during Phase 1.
+
 ### Handoff
 
 End the report with **How to proceed**. Ask the author to identify the IDs to revise and provide
@@ -284,12 +311,17 @@ do not proceed to Phase 2 in the same turn.
    suggestion (or the author’s specified variant). Preserve all results, numerical values,
    scientific claims, evidence strength, citations, and necessary technical detail; do not add
    hype, novelty, causal inference, or an explanation that the author did not support.
-6. Launch a validation agent with the approved IDs and final diff. It must verify that all edits are
+6. For approved figure-citation findings, add only the approved citation to the exact reported
+   sentence, using the established manuscript citation style and the verified supporting
+   figure/panel. Do not rewrite the sentence or change a figure, legend, panel label, or citation
+   target unless separately approved.
+7. Launch a validation agent with the approved IDs and final diff. It must verify that all edits are
    approved, that `\texttt{}` was removed only within approved Methods spans, that software
-   citations appear only in Methods, and that no replication-critical information, scientific
-   claim, numerical value, citation target, bibliography record, or LaTeX syntax was
+   citations appear only in Methods, that every newly added figure citation supports its specific
+   empirical claim, and that no replication-critical information, scientific claim, numerical
+   value, citation target, bibliography record, or LaTeX syntax was
    unintentionally changed. Correct or revert unapproved changes before reporting.
-7. Report applied IDs, validation result, skipped items, and outstanding author input.
+8. Report applied IDs, validation result, skipped items, and outstanding author input.
 
 ## Guardrails
 

@@ -36,6 +36,14 @@ data — so the user decides what actually gets changed.
 4. **Revise only approved findings:** a report or a detected non-compliance is never permission to
    edit.
 
+## Subagent parity
+
+When invoking a subagent for analysis, revision, or validation, configure it with the **same model,
+intelligence level, and reasoning effort as the current agent**. For example, if the current agent
+is Opus 4.8 with high reasoning, every subagent must be Opus 4.8 with high reasoning. Never
+delegate a decision to a lower-capability or lower-reasoning agent. If exact parity cannot be set,
+perform the work locally instead.
+
 ## Detecting which run this is
 
 - **First run (REPORT):** No `NC_CHECKS_SUMMARY.md` in the manuscript directory yet, or the user is

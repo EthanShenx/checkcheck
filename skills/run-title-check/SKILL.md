@@ -34,6 +34,14 @@ findings.
 3. **Wait:** stop after the report and obtain the author’s explicit selection of title IDs/options.
 4. **Revise only approved titles:** a proposed alternative is never permission to replace a title.
 
+## Subagent parity
+
+When invoking a subagent for analysis, revision, or validation, configure it with the **same model,
+intelligence level, and reasoning effort as the current agent**. For example, if the current agent
+is Opus 4.8 with high reasoning, every subagent must be Opus 4.8 with high reasoning. Never
+delegate a decision to a lower-capability or lower-reasoning agent. If exact parity cannot be set,
+perform the work locally instead.
+
 ## Detect the phase
 
 - **Phase 1 — REPORT:** The user asks for a title check, or no `TITLE_CHECK_SUMMARY.md` exists in

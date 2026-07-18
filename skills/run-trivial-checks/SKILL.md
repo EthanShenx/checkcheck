@@ -35,6 +35,14 @@ default. The author decides what is changed.
 4. **Revise only approved findings:** a report, a detected issue, or a general request to check is
    never permission to edit.
 
+## Subagent parity
+
+When invoking a subagent for analysis, revision, or validation, configure it with the **same model,
+intelligence level, and reasoning effort as the current agent**. For example, if the current agent
+is Opus 4.8 with high reasoning, every subagent must be Opus 4.8 with high reasoning. Never
+delegate a decision to a lower-capability or lower-reasoning agent. If exact parity cannot be set,
+perform the work locally instead.
+
 ## Detect the phase
 
 - **Phase 1 — REPORT:** The user asks for trivial checks, or no
