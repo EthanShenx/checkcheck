@@ -28,6 +28,13 @@ motivated, properly attributed, and concise **without** weakening reproducibilit
 analysis. Do not treat routine implementation detail as a defect automatically; context determines
 what a reader needs to reproduce the work.
 
+## Mandatory workflow
+
+1. **Inspect only:** read the complete relevant Methods section and its cited context.
+2. **Report only:** write `CONVENTION_CHECKS_SUMMARY.md`; do not edit manuscript files.
+3. **Wait:** stop after the report and obtain the author’s explicit approval of finding IDs/areas.
+4. **Revise only approved findings:** a report or a detected issue is never permission to edit.
+
 ## Detect the phase
 
 - **Phase 1 — REPORT:** The user asks for convention checks, or there is no

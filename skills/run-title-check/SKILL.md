@@ -27,6 +27,13 @@ the primary criteria: do not use vague, promotional, or stronger-than-supported 
 make a title more striking. A title must remain faithful to the manuscript’s stated work and
 findings.
 
+## Mandatory workflow
+
+1. **Inspect only:** read all in-scope titles and the context needed to assess them.
+2. **Report only:** write `TITLE_CHECK_SUMMARY.md`; do not edit manuscript files.
+3. **Wait:** stop after the report and obtain the author’s explicit selection of title IDs/options.
+4. **Revise only approved titles:** a proposed alternative is never permission to replace a title.
+
 ## Detect the phase
 
 - **Phase 1 — REPORT:** The user asks for a title check, or no `TITLE_CHECK_SUMMARY.md` exists in

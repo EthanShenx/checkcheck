@@ -25,6 +25,13 @@ This skill reduces repetitive, template-like prose patterns, not legitimate scho
 Scientific precision, authorial voice, and intended emphasis take priority over a mechanical style
 rule. A pattern must be repeated, distracting, or clearly unnatural before it becomes a finding.
 
+## Mandatory workflow
+
+1. **Inspect only:** read the relevant manuscript prose and identify patterns.
+2. **Report only:** write `DE_AI_SUMMARY.md`; do not edit manuscript files.
+3. **Wait:** stop after the report and obtain the author’s explicit approval of finding IDs/areas.
+4. **Revise only approved findings:** a report or a detected pattern is never permission to edit.
+
 ## Detect the phase
 
 - **Phase 1 — REPORT:** The user asks to de-AI the manuscript, or there is no

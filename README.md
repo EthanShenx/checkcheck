@@ -25,8 +25,8 @@
 ## The contract
 
 ```text
-Run 1  →  write a review summary; edit nothing; wait for the author
-Run 2  →  apply only approved findings; report the remaining author input
+Run 1  →  inspect, write a review summary, edit nothing, and wait for the author
+Run 2  →  apply only explicitly approved findings; report the remaining author input
 ```
 
 `run-trivial-checks` additionally validates the final diff to confirm revisions changed expression, not scientific content.

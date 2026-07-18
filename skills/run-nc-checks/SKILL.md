@@ -28,6 +28,14 @@ A two-phase Nature Communications (NC) submission-compliance pipeline. As with t
 **the first run only reports** — many apparent deviations are deliberate or dictated by the author's
 data — so the user decides what actually gets changed.
 
+## Mandatory workflow
+
+1. **Inspect only:** read the complete submission package and measure every relevant requirement.
+2. **Report only:** write `NC_CHECKS_SUMMARY.md`; do not edit any submission file.
+3. **Wait:** stop after the report and obtain the author’s explicit approval of finding IDs/areas.
+4. **Revise only approved findings:** a report or a detected non-compliance is never permission to
+   edit.
+
 ## Detecting which run this is
 
 - **First run (REPORT):** No `NC_CHECKS_SUMMARY.md` in the manuscript directory yet, or the user is

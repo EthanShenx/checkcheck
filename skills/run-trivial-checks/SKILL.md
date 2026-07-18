@@ -27,6 +27,14 @@ This is a deliberately conservative, two-phase manuscript-editing pipeline. Trea
 as biomedical writing: terminology, gene symbols, names, and deliberate wording are not typos by
 default. The author decides what is changed.
 
+## Mandatory workflow
+
+1. **Inspect only:** read the complete relevant manuscript and support files.
+2. **Report only:** write `TRIVIAL_CHECKS_SUMMARY.md`; do not edit any manuscript or support file.
+3. **Wait:** stop after the report and obtain the author’s explicit approval of finding IDs/areas.
+4. **Revise only approved findings:** a report, a detected issue, or a general request to check is
+   never permission to edit.
+
 ## Detect the phase
 
 - **Phase 1 — REPORT:** The user asks for trivial checks, or no
