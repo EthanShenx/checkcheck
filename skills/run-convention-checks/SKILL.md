@@ -1,11 +1,12 @@
 ---
 name: run-convention-checks
 description: >
-  Check whether a manuscript follows academic-paper conventions. The scope audits Methods for
+  Check whether a manuscript follows academic-paper conventions. The scope audits narrative
+  structure in the Introduction, Results, and Discussion; clear, concise language; Methods for
   forbidden \texttt{} formatting, software citation placement and functional introductions,
   missing motivation for consequential analytical choices, and nonessential implementation detail;
-  it also audits manuscript-wide literature citations for evidence-backed replacement candidates.
-  Use whenever the user says
+  and manuscript-wide literature citations for evidence-backed replacement candidates. Use whenever
+  the user says
   "convention checks", "academic paper conventions", "methods conventions", or invokes
   /run-convention-checks. First run writes CONVENTION_CHECKS_SUMMARY.md without editing; a later
   run applies only user-approved revisions and validates that methods remain reproducible.
@@ -32,8 +33,8 @@ what a reader needs to reproduce the work.
 
 ## Mandatory workflow
 
-1. **Inspect only:** read the complete relevant Methods section, manuscript claims, and cited
-   literature context.
+1. **Inspect only:** read the Introduction, Results, Discussion, Methods, manuscript claims, and
+   cited-literature context.
 2. **Report only:** write `CONVENTION_CHECKS_SUMMARY.md`; do not edit manuscript files.
 3. **Wait:** stop after the report and obtain the author’s explicit approval of finding IDs/areas.
 4. **Revise only approved findings:** a report or a detected issue is never permission to edit.
@@ -46,18 +47,19 @@ what a reader needs to reproduce the work.
 - **Phase 2 — REVISE:** The user has reviewed the summary and identifies the finding IDs or areas
   to revise. Apply only those approved changes, then validate the final diff.
 
-If phase is ambiguous, ask. If the Methods text, manuscript citations, or bibliography changed
-after a report was made, write a fresh report rather than acting on stale finding IDs.
+If phase is ambiguous, ask. If the manuscript text, citations, or bibliography changed after a
+report was made, write a fresh report rather than acting on stale finding IDs.
 
-## Locate the Methods section and citation context
+## Locate manuscript sections and citation context
 
 Use the manuscript path supplied by the user. Otherwise locate the root LaTeX document
 (`\documentclass` / `\begin{document}`), its included `.tex` files, or the relevant `.docx` /
-`.md` manuscript. Identify the Methods section and all Methods subsections, including material
-loaded with `\input` or `\include`. Locate the bibliography (`.bib`, reference list, and citation
-commands) and scan the complete main text for literature claims and software citations. The Methods
-checks apply only to Methods; the literature-replacement and software-citation-placement checks
-also require the relevant full-manuscript context. Do not audit supplementary source unless it is
+`.md` manuscript. Identify the Introduction, Results (and each Results section/subsection),
+Discussion, Methods section and all Methods subsections, including material loaded with `\input`
+or `\include`. Locate the bibliography (`.bib`, reference list, and citation commands) and scan
+the complete main text for literature claims and software citations. The Methods checks apply only
+to Methods; the narrative, language, literature-replacement, and software-citation-placement
+checks require the relevant full-manuscript context. Do not audit supplementary source unless it is
 part of Methods or necessary to resolve a cited claim.
 
 Write `CONVENTION_CHECKS_SUMMARY.md` in the manuscript directory.
@@ -66,18 +68,18 @@ Write `CONVENTION_CHECKS_SUMMARY.md` in the manuscript directory.
 
 ## PHASE 1 — report only
 
-Read the complete Methods section, relevant manuscript claims, and citation sources. Do not modify
-files. Write `CONVENTION_CHECKS_SUMMARY.md` with: files and Methods sections analysed; date; an
-explicit statement that **“No manuscript files were edited.”**; a dashboard; and one section per
-check. Each finding requires a stable ID (for example, `MC-CITATION-01`), precise location, short
-excerpt or description, rationale, a proposed meaning-preserving revision, status (`PASS`,
-`REVIEW`, or `NEEDS AUTHOR INPUT`), and confidence.
+Read the complete in-scope manuscript, relevant claims, and citation sources. Do not modify files.
+Write `CONVENTION_CHECKS_SUMMARY.md` with: files and sections analysed; date; an explicit statement
+that **“No manuscript files were edited.”**; a dashboard; and one section per check. Each finding
+requires a stable ID (for example, `MC-CITATION-01`), precise location, short excerpt or
+description, rationale, a proposed meaning-preserving revision, status (`PASS`, `REVIEW`, or
+`NEEDS AUTHOR INPUT`), and confidence.
 
 Report representative clusters when a repeated issue has one shared solution. Do not generate a
 finding for every benign routine step or infer a scientific rationale that the manuscript does not
 provide.
 
-### Required Methods and literature-citation checks
+### Required narrative, language, Methods, and literature-citation checks
 
 1. **No `\texttt{}` formatting.** Find every `\texttt{...}` command in the Methods section,
    including commands split across included source files. Each is a finding. The approved revision
@@ -200,6 +202,58 @@ provide.
    and any implementation choice that can change results. If unsure whether a detail is necessary,
    mark it `REVIEW` rather than proposing deletion.
 
+9. **Introduction narrative order and significance.** Assess whether the Introduction builds a
+   clear, compelling scientific case in this order:
+   1. essential background knowledge and why it matters;
+   2. what remains unknown and why that gap matters;
+   3. what the study did to fill the gap; and
+   4. a concise summary of what was done and why it is significant.
+
+   Flag missing, misplaced, repetitive, or weakly connected stages. Assess whether the gap is made
+   genuinely consequential and surprising in light of the field, so a specialist reader can see
+   why the question matters and why it has not already been resolved. Do not manufacture novelty,
+   exaggerate importance, or use hype; propose evidence-based framing that makes the actual
+   question, gap, and contribution unmistakable.
+
+10. **Results narrative order and cross-section logic.** For every Results section/subsection,
+    assess whether the narrative follows this order:
+    1. context for the experiment—why it is needed and how it connects to the study aim, hypothesis,
+       or preceding Results section;
+    2. what was done to answer the question; and
+    3. what was found.
+
+    Flag a section that opens with a procedural action rather than context, or whose experiment,
+    findings, and connection to the Introduction/previous section are not explicit. Report the
+    missing link and suggest a meaning-preserving contextual or transition sentence. Do not alter
+    the results, introduce a hypothesis not present in the paper, or rewrite a factual result as
+    narrative flourish.
+
+11. **Discussion narrative order and interpretation.** Assess whether the Discussion:
+    1. opens by moving from what was known before, to what was unknown, to what is now known, and
+       the resulting new state of play;
+    2. for each major finding, links back to the Introduction question, compares it with relevant
+       prior work, addresses agreement or disagreement and any evidence-based reason, and states a
+       justified next question or direction; and
+    3. ends with a final paragraph that clearly concludes what contribution the study has made.
+
+    Flag missing links, unsupported explanations for disagreement, unacknowledged tension with
+    prior literature, or a conclusion that does not state the contribution. Never invent a reason
+    for a conflict, a future direction, or a comparison with literature; mark missing evidence
+    `NEEDS AUTHOR INPUT`.
+
+12. **Plain, economical scientific language.** Apply this principle: scientific writing is an act
+    of organisation, and the best prose communicates the intended meaning in the fewest clear
+    words. Review the complete manuscript for wordiness, repetition, unnecessary jargon, inflated
+    diction, redundant transitions, and sentence construction that obscures a point that could be
+    stated in plain prose. Do not simplify indispensable technical terminology, precision, or
+    legitimate nuance merely to target a school-grade reading level.
+
+    In `CONVENTION_CHECKS_SUMMARY.md`, provide a dedicated **Language findings** table with exactly
+    two columns: **Original** and **Suggested change**. Put the location inside the Original cell
+    (for example, `Results, paragraph 2 — “...”`) so the table remains two-column. List every
+    passage that violates this principle, not only representative examples. Each suggestion must
+    retain the scientific meaning, level of certainty, and necessary technical detail.
+
 ### Handoff
 
 End the report with **How to proceed**. Ask the author to identify the IDs to revise and provide
@@ -211,8 +265,8 @@ do not proceed to Phase 2 in the same turn.
 ## PHASE 2 — revise only approved findings
 
 1. Parse the approval into exact finding IDs. If an instruction could remove a replication-relevant
-   detail, replace a literature reference, or needs an unprovided citation/rationale, ask before
-   editing.
+   detail, revise narrative content, replace a literature reference, or needs an unprovided
+   citation/rationale, ask before editing.
 2. Remove every approved `\texttt{}` wrapper in Methods, retaining the exact contents and valid
    LaTeX escaping. Apply other approved changes locally and preserve all scientific claims, values,
    software versions, parameters, citations, cross-references, and LaTeX semantics.
@@ -226,12 +280,16 @@ do not proceed to Phase 2 in the same turn.
    author supplied it, it is verified from an authoritative source, or the author explicitly
    approves the precise language. Never invent provenance, methodological justification, or
    reproducibility details.
-5. Launch a validation agent with the approved IDs and final diff. It must verify that all edits are
+5. For approved narrative or language findings, revise only the specified span using the approved
+   suggestion (or the author’s specified variant). Preserve all results, numerical values,
+   scientific claims, evidence strength, citations, and necessary technical detail; do not add
+   hype, novelty, causal inference, or an explanation that the author did not support.
+6. Launch a validation agent with the approved IDs and final diff. It must verify that all edits are
    approved, that `\texttt{}` was removed only within approved Methods spans, that software
    citations appear only in Methods, and that no replication-critical information, scientific
    claim, numerical value, citation target, bibliography record, or LaTeX syntax was
    unintentionally changed. Correct or revert unapproved changes before reporting.
-6. Report applied IDs, validation result, skipped items, and outstanding author input.
+7. Report applied IDs, validation result, skipped items, and outstanding author input.
 
 ## Guardrails
 
@@ -240,5 +298,7 @@ do not proceed to Phase 2 in the same turn.
   replication.
 - Preserve the Methods’ actual tense and authorial voice unless a separately approved revision
   changes it.
+- Narrative structure and plain language must clarify the paper’s existing logic; they never
+  justify exaggerating significance, novelty, certainty, or disagreement with prior work.
 - Prefer an author question to an unsupported rationale, citation, GitHub URL, impact factor, or
-  claim-to-source mapping.
+  claim-to-source mapping, narrative link, or interpretation of prior literature.
